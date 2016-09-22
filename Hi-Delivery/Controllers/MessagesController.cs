@@ -48,35 +48,43 @@ namespace Hi_Delivery
                 {
                     switch (StLUIS.intents[0].intent)
                     {
-                        case "Mostrar info de pizza":
-                            StockRateString = "Estás solicitando info de una pizza ";
+                        case "Mostrar info de producto":
+                            StockRateString = "Estás solicitando info ";
                             for (int i=0; i < StLUIS.entities.Length; i++)
                             {
                                 switch (StLUIS.entities[i].type)
                                 {
-                                    case "Sabor":
-                                        StockRateString += "sabor " + StLUIS.entities[i].entity + " ";
+                                    case "Clase":
+                                        StockRateString += " de clase " + StLUIS.entities[i].entity + " ";
                                         break;
 
                                     case "Tamaño":
                                         StockRateString += "de tamaño " + StLUIS.entities[i].entity + " ";
+                                        break;
+
+                                    case "Tipo":
+                                        StockRateString += "de tipo " + StLUIS.entities[i].entity + " ";
                                         break;
 
                                 }
                             }
                             break;
-                        case "Pedir pizza":
-                            StockRateString = "Estás pidiendo una pizza ";
+                        case "Pedir producto":
+                            StockRateString = "Estás pidiendo un producto ";
                             for (int i = 0; i < StLUIS.entities.Length; i++)
                             {
                                 switch (StLUIS.entities[i].type)
                                 {
-                                    case "Sabor":
-                                        StockRateString += "sabor " + StLUIS.entities[i].entity + " ";
+                                    case "Clase":
+                                        StockRateString += "de clase " + StLUIS.entities[i].entity + " ";
                                         break;
 
                                     case "Tamaño":
                                         StockRateString += "de tamaño " + StLUIS.entities[i].entity + " ";
+                                        break;
+
+                                    case "Tipo":
+                                        StockRateString += "de tipo " + StLUIS.entities[i].entity + " ";
                                         break;
 
                                 }
@@ -84,6 +92,10 @@ namespace Hi_Delivery
                             break;
                         default:
                             StockRateString = "No entiendo lo que dices";
+                            if (activity.Text == "hola")
+                            {
+                                StockRateString = "¡Buen día! ¿En qué puedo servirle?";
+                            }
                             break;
                     }
                     ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
